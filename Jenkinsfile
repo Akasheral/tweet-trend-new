@@ -16,7 +16,7 @@ environment {
             }
         }
     }
-         stage("test"){
+    stage("test"){
             steps{
                 echo "---------------- unit test started ------------------"
                 sh 'mvn surefire-report:report'
@@ -33,7 +33,7 @@ environment {
     }
         }
     }
-        stage("Quality Gate"){
+    stage("Quality Gate"){
             steps{
                   timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
                 def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
@@ -43,4 +43,4 @@ environment {
   }
         }
     }
-}        
+}      
