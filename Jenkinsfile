@@ -16,24 +16,24 @@ environment {
             }
         }
     }
-    stage("test"){
+        stage("test"){
             steps{
                 echo "---------------- unit test started ------------------"
                 sh 'mvn surefire-report:report'
                 echo " --------------- unit test completed -----------------"
             }
          }
-    stage('SonarQube analysis') {
-        environment {
-    def scannerHome = tool 'akash-sonar-scanner'
+        stage('SonarQube analysis') {
+          environment {
+          def scannerHome = tool 'akash-sonar-scanner'
         }
         steps{
-    withSonarQubeEnv('akash-sonarcube-server') { // If you have configured more than one global server connection, you can specify its name
-      sh "${scannerHome}/bin/sonar-scanner"
+          withSonarQubeEnv('akash-sonarcube-server') { // If you have configured more than one global server connection, you can specify its name
+          sh "${scannerHome}/bin/sonar-scanner"
     }
         }
     }
-    stage("Quality Gate"){
+        stage("Quality Gate"){
             steps{
                 script{
                   timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
