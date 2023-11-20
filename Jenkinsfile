@@ -1,4 +1,4 @@
-def registry = https://akash01.jfrog.io/
+def registry = 'https://akash01.jfrog.io'
 def imageName = 'akash01.jfrog.io/akasheralrepo-docker-local/ttrend'
 def version   = '2.1.2'
 
