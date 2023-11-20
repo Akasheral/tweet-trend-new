@@ -1,29 +1,27 @@
 pipeline {
     agent {
-            node {
-                label 'maven'
-            }
+        node {
+            label 'maven'
+        }
     }
-    environment {
-        PATH = "/opt/apache-maven-3.9.5/bin:$PATH"
-    }
-
+environment {
+    PATH = "/opt/apache-maven-3.9.2/bin:$PATH"
+}
     stages {
         stage("build"){
             steps {
-                echo "-----------------------build started------------------"
+                 echo "----------- build started ----------"
                 sh 'mvn clean deploy -Dmaven.test.skip=true'
-                echo "----------------------build completed----------------"
+                 echo "----------- build complted ----------"
             }
         }
-        stage("test")
+        stage("test"){
             steps{
-                echo "------------------unit test started-----------------------"
+                echo "----------- unit test started ----------"
                 sh 'mvn surefire-report:report'
-                echo "------------------unit test completed---------------------"
+                 echo "----------- unit test Complted ----------"
             }
-       
-    
+        }
 
     stage('SonarQube analysis') {
     environment {
@@ -34,8 +32,6 @@ pipeline {
       sh "${scannerHome}/bin/sonar-scanner"
     }
     }
-  } 
+  }
     }
-
 }
-
